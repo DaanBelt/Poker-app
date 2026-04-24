@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('game_sessions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('host_user_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->string('name');
+            $table->timestamp('started_at')->nullable();
+            $table->timestamp('ended_at')->nullable();
             $table->timestamps();
         });
     }
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('gamesessions');
+        Schema::dropIfExists('game_sessions');
     }
 };
